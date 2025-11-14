@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        padding: 20px;
+        color: #333;
+      }
+
+      div {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      ul.fdiv {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      ul.fdiv li {
+        flex: 1 1 120px;
+      }
+
+      ul.fdiv li input {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+      }
+
+      ul.fdiv li input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      ul.fdiv li button {
+        width: 100%;
+        padding: 9px 12px;
+        font-size: 1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      ul.fdiv li button:hover {
+        background-color: #0056b3;
+      }
+
+      .studentOl {
+        list-style-position: inside;
+        padding-left: 0;
+        border-top: 1px solid #ddd;
+      }
+
+      .studentOl li {
+        padding: 10px 12px;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+
+      .passed {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .failed {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form onsubmit="return false;">
+        <ul class="fdiv">
+          <li><input id="roll" type="number" placeholder="Roll No" /></li>
+          <li><input id="marks" type="number" placeholder="Marks" /></li>
+          <li><input id="name" placeholder="Name" /></li>
+          <li><button type="button" id="addStudent">Add Student</button></li>
+          <li>
+            <button type="button" id="showPassed">Show Passed Students</button>
+          </li>
+          <li><button type="button" id="showAll">Show All Students</button></li>
+        </ul>
+      </form>
+
+      <ol class="studentOl"></ol>
+    </div>
+
+    <script>
+      class Student {
+        constructor(name, rollNo, marks) {
+          this.name = name;
+          this.rollNo = rollNo;
+          this.marks = marks;
+        }
+        isPassed() {
+          return this.marks > 40;
+        }
+      }
+
+      const studentArr = [];
+
+      const studentsOL = document.querySelector(".studentOl");
+      const inputRoll = document.getElementById("roll");
+      const inputMarks = document.getElementById("marks");
+      const inputName = document.getElementById("name");
+      const btnAdd = document.getElementById("addStudent");
+      const btnShowPassed = document.getElementById("showPassed");
+      const btnShowAll = document.getElementById("showAll");
+
+      btnAdd.addEventListener("click", () => {
+        const name = inputName.value.trim();
+        const rollNo = inputRoll.value.trim();
+        const marks = Number(inputMarks.value.trim());
+
+        if (!name || !rollNo || isNaN(marks)) {
+          alert("Please fill all fields with valid data.");
+          return;
+        }
+
+        // Add new student to array
+        studentArr.push(new Student(name, rollNo, marks));
+
+        // Clear inputs
+        inputName.value = "";
+        inputRoll.value = "";
+        inputMarks.value = "";
+
+        // Show all students after adding
+        displayStudents(studentArr);
+      });
+
+      btnShowPassed.addEventListener("click", () => {
+        const passedStudentArr = studentArr.filter((s) => s.isPassed());
+        displayStudents(passedStudentArr);
+      });
+
+      btnShowAll.addEventListener("click", () => {
+        displayStudents(studentArr);
+      });
+
+      function displayStudents(arr) {
+        studentsOL.innerHTML = "";
+        if (arr.length === 0) {
+          studentsOL.innerHTML = "<li>No students to display</li>";
+          return;
+        }
+
+        arr.forEach((s) => {
+          const cname = s.isPassed() ? "passed" : "failed";
+          studentsOL.innerHTML += `<li class="${cname}">
+      Name: ${s.name}, Roll No: ${s.rollNo}, Marks: ${
+            s.marks
+          }%, Passed: ${s.isPassed()}
+    </li>`;
+        });
+      }
+    </script>
+  </body>
+</html>

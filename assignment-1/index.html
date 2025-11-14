@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Greet User</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 400px;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .output {
+        font-size: 18px;
+        color: #2d3b55;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .input-field {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Greet User</h1>
+
+      <!-- Input fields for name and city -->
+      <input
+        type="text"
+        id="nameInput"
+        class="input-field"
+        placeholder="Enter your name"
+      />
+      <input
+        type="text"
+        id="cityInput"
+        class="input-field"
+        placeholder="Enter your city"
+      />
+
+      <!-- Button to trigger greeting -->
+      <button class="button" onclick="greetUser()">Greet Me</button>
+
+      <!-- Output for greeting message -->
+      <div id="greetingMessage" class="output"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Arrow function that greets the user
+      const greetUser = () => {
+        // Get the input values
+        let name = document.getElementById("nameInput").value;
+        let city = document.getElementById("cityInput").value;
+
+        // Create the greeting message
+        let greetingMessage = `Hello, my name is ${name} and I live in ${city}.`;
+
+        // Display the greeting message in the output div
+        document.getElementById("greetingMessage").textContent =
+          greetingMessage;
+      };
+    </script>
+  </body>
+</html>

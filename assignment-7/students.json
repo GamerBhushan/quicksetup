@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Ram",
+        "age": 21,
+        "branch": "MCA"
+    },
+    {
+        "name": "Abhishek",
+        "age": 20,
+        "branch": "Computer Science"
+    },
+    {
+        "name": "Rohan",
+        "age": 21,
+        "branch": "Civil"
+    },
+    {
+        "name": "Vivek",
+        "age": 23,
+        "branch": "Civil"
+    }
+]
